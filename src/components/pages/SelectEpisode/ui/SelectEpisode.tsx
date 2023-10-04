@@ -3,7 +3,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { series } from "../../../../content";
 import { ListItemButton, ListItemIcon } from "@mui/material";
-import { OutlinedFlag } from "@mui/icons-material";
+import { Flag, OutlinedFlag, OutlinedFlagRounded } from "@mui/icons-material";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppBar } from "components/widgets/AppBar";
 
@@ -14,7 +14,7 @@ export const SelectEpisode = () => {
   const currentSeries = series[seriesId];
   const episodesCount = currentSeries
     ? // @ts-ignore
-      Object.keys(currentSeries.seasons[seasonId])
+      Object.entries(currentSeries.seasons[seasonId])
     : [];
 
   return (
@@ -23,18 +23,32 @@ export const SelectEpisode = () => {
       <h2>{currentSeries?.name}</h2>
       <p>{currentSeries?.description}</p>
       <List>
-        {episodesCount.map((key) => (
-          <ListItem disablePadding key={key}>
-            <ListItemButton
-              onClick={() => navigate(`/${seriesId}/${seasonId}/${key}`)}
-            >
-              <ListItemIcon>
-                <OutlinedFlag />
-              </ListItemIcon>
-              <ListItemText primary={key} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {episodesCount.map(([key, value]: [string, any]) => {
+          const selectedStr = localStorage.getItem(
+            `${seriesId}.${seasonId}.${key}`
+          );
+          const selected = selectedStr ? JSON.parse(selectedStr).length : 0;
+
+          return (
+            <ListItem disablePadding key={key}>
+              <ListItemButton
+                onClick={() => navigate(`/${seriesId}/${seasonId}/${key}`)}
+              >
+                <ListItemIcon>
+                  {selected !== value.subtitles.length ? (
+                    <OutlinedFlag />
+                  ) : (
+                    <Flag />
+                  )}
+                </ListItemIcon>
+                <ListItemText
+                  primary={key}
+                  secondary={`${selected}/${value.subtitles.length}`}
+                />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
       </List>
     </>
   );

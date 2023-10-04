@@ -76,14 +76,13 @@ export const EpisodeList = () => {
                 </Tooltip>
               }
             >
-              <ListItemButton dense>
+              <ListItemButton disableRipple dense>
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
                     checked={isSelected}
                     tabIndex={-1}
                     disableRipple
-                    inputProps={{ "aria-labelledby": labelId }}
                   />
                 </ListItemIcon>
                 <ListItemText id={labelId} primary={value.eng} />
