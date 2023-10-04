@@ -6,6 +6,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Paper,
   Tooltip,
 } from "@mui/material";
 import { CommentOutlined } from "@mui/icons-material";
@@ -57,40 +58,44 @@ export const EpisodeList = () => {
   return (
     <>
       <AppBar />
-      <h2>{currentEpisode.name}</h2>
-      <List>
-        {currentEpisode.subtitles.map((value: any, index: number) => {
-          const labelId = `checkbox-list-label-${value}`;
-          const isSelected = selectedSubtitles.includes(index);
+      <Paper sx={{ padding: "12px", marginBottom: "8px" }}>
+        <h2>{currentEpisode.name}</h2>
+      </Paper>
+      <Paper>
+        <List>
+          {currentEpisode.subtitles.map((value: any, index: number) => {
+            const labelId = `checkbox-list-label-${value}`;
+            const isSelected = selectedSubtitles.includes(index);
 
-          return (
-            <ListItem
-              key={Math.random()}
-              disablePadding
-              onClick={() => checkboxHandler(index)}
-              secondaryAction={
-                <Tooltip title={value.rus} placement="top-start">
-                  <IconButton edge="end" aria-label="comments">
-                    <CommentOutlined />
-                  </IconButton>
-                </Tooltip>
-              }
-            >
-              <ListItemButton disableRipple dense>
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={isSelected}
-                    tabIndex={-1}
-                    disableRipple
-                  />
-                </ListItemIcon>
-                <ListItemText id={labelId} primary={value.eng} />
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
-      </List>
+            return (
+              <ListItem
+                key={Math.random()}
+                disablePadding
+                onClick={() => checkboxHandler(index)}
+                secondaryAction={
+                  <Tooltip title={value.rus} placement="top-start">
+                    <IconButton edge="end" aria-label="comments">
+                      <CommentOutlined />
+                    </IconButton>
+                  </Tooltip>
+                }
+              >
+                <ListItemButton disableRipple dense>
+                  <ListItemIcon>
+                    <Checkbox
+                      edge="start"
+                      checked={isSelected}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                  </ListItemIcon>
+                  <ListItemText id={labelId} primary={value.eng} />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Paper>
     </>
   );
 };
