@@ -1,8 +1,8 @@
-import { friends } from "./friends";
-import { threePlusOne } from "./treePlusOne";
+import { friends } from './friends';
+import { threePlusOne } from './treePlusOne';
 
 export const series = {
-  threePlusOne, 
+  threePlusOne,
   friends,
 };
 
@@ -15,4 +15,11 @@ export const seriesRequest = [
     name: 'Друзья',
     id: 'friends',
   },
-]
+];
+
+export interface IEpisode {
+  rus: string;
+  eng: string;
+  startPos: string;
+  endPos: string;
+}

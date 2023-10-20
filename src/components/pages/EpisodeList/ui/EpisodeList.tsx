@@ -1,134 +1,66 @@
-import {
-  Button,
-  ButtonGroup,
-  Checkbox,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Paper,
-  Tooltip,
-} from "@mui/material";
-import { CommentOutlined } from "@mui/icons-material";
-import { series } from "../../../../content";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { AppBar } from "components/widgets/AppBar";
-import { Player } from "components/widgets/Player";
+import { Button, ButtonGroup } from '@mui/material';
+import { AppBar } from 'components/widgets/AppBar';
+import { useState } from 'react';
+import styles from './EpisodeList.module.css';
+import { useParams } from 'react-router-dom';
+import { series } from 'content';
+import { Player } from 'components/widgets/Player';
+import { List } from 'components/widgets/List';
+
+export type TSteps =
+  | 'trackOnly'
+  | 'trackWithSubtitles'
+  | 'textForeign'
+  | 'textWithTranslate';
 
 export const EpisodeList = () => {
   const { seriesId, seasonId, episodeId } = useParams();
-  const selected = localStorage.getItem(`${seriesId}.${seasonId}.${episodeId}`);
-  const [selectedSubtitles, setSelectedSubtitles] = useState<number[]>(
-    selected ? JSON.parse(selected) : []
-  );
+  const [type, setType] = useState<TSteps>('trackOnly');
   // @ts-ignore
   const currentEpisode = series[seriesId].seasons[seasonId][episodeId];
-  const [type, setType] = useState<"all" | "unstudied" | "player">("all");
-
-  const checkboxHandler = (index: number) => {
-    let foundIndex = selectedSubtitles.indexOf(index);
-    if (foundIndex !== -1) {
-      setSelectedSubtitles([
-        ...selectedSubtitles.slice(0, foundIndex),
-        ...selectedSubtitles.slice(foundIndex + 1),
-      ]);
-    } else {
-      let lastIndex = 0;
-      for (let i = 0; i < selectedSubtitles.length; i++) {
-        if (index > selectedSubtitles[i]) {
-          lastIndex = i;
-          break;
-        }
-      }
-      setSelectedSubtitles([
-        ...selectedSubtitles.slice(0, lastIndex),
-        index,
-        ...selectedSubtitles.slice(lastIndex),
-      ]);
-    }
-  };
-
-  useEffect(() => {
-    localStorage.setItem(
-      `${seriesId}.${seasonId}.${episodeId}`,
-      JSON.stringify(selectedSubtitles)
-    );
-  }, [selectedSubtitles, seriesId, seasonId, episodeId]);
-
-  useEffect(() => {}, [type]);
 
   return (
     <>
       <AppBar />
-      <Paper sx={{ padding: "12px", marginBottom: "8px" }}>
+      <div className={styles.header}>
         <h2>{currentEpisode.name}</h2>
         <ButtonGroup>
           <Button
-            variant={type === "all" ? "contained" : "outlined"}
-            onClick={() => setType("all")}
+            onClick={() => setType('trackOnly')}
+            variant={type === 'trackOnly' ? 'contained' : 'outlined'}
           >
-            All
+            Video
           </Button>
           <Button
-            variant={type === "unstudied" ? "contained" : "outlined"}
-            onClick={() => setType("unstudied")}
+            onClick={() => setType('trackWithSubtitles')}
+            variant={type === 'trackWithSubtitles' ? 'contained' : 'outlined'}
           >
-            Unstudied
+            Video + subtitles
           </Button>
           <Button
-            variant={type === "player" ? "contained" : "outlined"}
-            onClick={() => setType("player")}
+            onClick={() => setType('textForeign')}
+            variant={type === 'textForeign' ? 'contained' : 'outlined'}
           >
-            Player
+            Foreign Text
+          </Button>
+          <Button
+            onClick={() => setType('textWithTranslate')}
+            variant={type === 'textWithTranslate' ? 'contained' : 'outlined'}
+          >
+            Text + Translate
           </Button>
         </ButtonGroup>
-      </Paper>
-      <Paper>
-        <List>
-          {type !== "player" ? (
-            currentEpisode.subtitles.map((value: any, index: number) => {
-              const labelId = `checkbox-list-label-${value}`;
-              const isSelected = selectedSubtitles.includes(index);
-              if (type === "unstudied" && isSelected) return null;
-
-              return (
-                <ListItem
-                  key={Math.random()}
-                  disablePadding
-                  onClick={() => checkboxHandler(index)}
-                  secondaryAction={
-                    <Tooltip title={value.rus} placement="top-start">
-                      <IconButton edge="end" aria-label="comments">
-                        <CommentOutlined />
-                      </IconButton>
-                    </Tooltip>
-                  }
-                >
-                  <ListItemButton disableRipple dense>
-                    <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        checked={isSelected}
-                        tabIndex={-1}
-                        disableRipple
-                      />
-                    </ListItemIcon>
-                    <ListItemText id={labelId} primary={value.eng} />
-                  </ListItemButton>
-                </ListItem>
-              );
-            })
-          ) : (
-            <Player
-              episode={currentEpisode.subtitles}
-              selected={selectedSubtitles}
-            />
-          )}
-        </List>
-      </Paper>
+      </div>
+      <div className={styles.content}>
+        {type === 'trackOnly' && <Player />}
+        {type === 'trackWithSubtitles' && <Player withSubtitles />}
+        {type === 'textForeign' && (
+          <List episodeList={currentEpisode.subtitles} />
+        )}
+        {type === 'textWithTranslate' && (
+          <List episodeList={currentEpisode.subtitles} withTranslate />
+        )}
+      </div>
     </>
   );
 };
