@@ -6,6 +6,8 @@ import {
   Breadcrumbs,
 } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
+import classes from './AppBar.module.css'
+import './AppBar.css'
 
 export const AppBar = () => {
   const params = useParams();
@@ -14,17 +16,16 @@ export const AppBar = () => {
     <MuiAppBar position="static">
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Breadcrumbs sx={{ color: "white" }}>
-          <Link style={{ color: "white" }} to="/">
-            ...
+          <Link to="/">
+            LOGO
           </Link>
           {params?.seriesId} ?
-          <Link style={{ color: "white" }} to={`/${params.seriesId}`}>
+          <Link to={`/${params.seriesId}`}>
             {params.seriesId}
           </Link>
           : null;
           {params?.seasonId} ?
           <Link
-            style={{ color: "white" }}
             to={`/${params.seriesId}/${params.seasonId}`}
           >
             {params.seasonId}
@@ -32,7 +33,6 @@ export const AppBar = () => {
           : null;
           {params?.episodeId} ?
           <Link
-            style={{ color: "white" }}
             to={`/${params.seriesId}/${params.seasonId}/${params.episodeId}`}
           >
             {params.episodeId}
