@@ -4,7 +4,8 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './components/app/router/paths';
 import { vttGenerator } from 'helpers/vttGenerator';
 import { episode1 } from 'content/treePlusOne/season1/episode1';
-import Error from 'components/pages/Error/Error';
+
+
 
 export const App = () => {
   const [state, setStateHook] = useState<IGlobalContext>(defaultValue);
@@ -22,6 +23,6 @@ export const App = () => {
       router={router} 
        />
     </MyGlobalContext.Provider>
-       
+           
   );
 };
