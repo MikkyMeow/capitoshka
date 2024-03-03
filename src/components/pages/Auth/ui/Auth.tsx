@@ -12,7 +12,8 @@ export const Auth = ()=> {
     const [type, setType] = useState('Authorization')
     const [result, setResult] = useState('')
     const Enter = function enter(IProp: {password: string, login: string, setResult(): any}) {
-        setResult(login + password)   
+        console.log(result);
+        setResult(login + password);   
         console.log(result);    
     }
 
