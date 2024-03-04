@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { IGlobalContext, MyGlobalContext, defaultValue } from './context';
+import { Context, defaultValue } from './context';
 import { RouterProvider } from 'react-router-dom';
-import { router } from './components/app/router/paths';
-import { vttGenerator } from 'helpers/vttGenerator';
-import { episode1 } from 'content/treePlusOne/season1/episode1';
+import { router } from 'router';
+import { IGlobalContext } from 'context/types';
 
 export const App = () => {
   const [state, setStateHook] = useState<IGlobalContext>(defaultValue);
@@ -13,11 +12,9 @@ export const App = () => {
     localStorage.setItem(key, value);
   };
 
-  console.log(vttGenerator(episode1));
-
   return (
-    <MyGlobalContext.Provider value={{ state, setState }}>
+    <Context.Provider value={{ state, setState }}>
       <RouterProvider router={router} />
-    </MyGlobalContext.Provider>
+    </Context.Provider>
   );
 };

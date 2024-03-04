@@ -1,10 +1,5 @@
 import { createContext, useContext } from "react";
-
-export interface IGlobalContext {
-  series: string;
-  season: string;
-  episode: string;
-}
+import { IGlobalContext } from "./types";
 
 export type GlobalContent = {
   state: IGlobalContext;
@@ -12,17 +7,15 @@ export type GlobalContent = {
 };
 
 export const defaultValue = {
-  series: localStorage.getItem("series") || "",
-  season: localStorage.getItem("season") || "",
-  episode: localStorage.getItem("episode") || "",
+  state: 'state',
 };
 
-export const MyGlobalContext = createContext<GlobalContent>({
+export const Context = createContext<GlobalContent>({
   state: defaultValue,
   setState: () => {},
 });
 
-export const useGlobalContext = () => useContext(MyGlobalContext);
+export const useGlobalContext = () => useContext(Context);
 
 export const clearState = (setState: (c: IGlobalContext) => void) => {
   setState(defaultValue);
