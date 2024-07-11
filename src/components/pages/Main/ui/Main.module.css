@@ -1,0 +1,36 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.button {
+  display: block;
+  text-align: center;
+  width: 320px;
+  background: rgb(75, 75, 199);
+  color: white;
+  text-decoration: none;
+  padding: 16px 20px;
+  border-radius: 16px;
+  transition: 0.3s;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.button:active {
+  opacity: 0.7;
+}
+
+.button.disabled {
+  background: rgb(147, 147, 147);
+  pointer-events: none;
+}
+.button.disabled:hover {
+  opacity: 1;
+}

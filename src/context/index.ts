@@ -1,5 +1,5 @@
-import { createContext, useContext } from "react";
-import { IGlobalContext } from "./types";
+import { createContext, useContext } from 'react';
+import { IGlobalContext } from './types';
 
 export type GlobalContent = {
   state: IGlobalContext;

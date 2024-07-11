@@ -2,3 +2,4 @@
 
 declare module '.webm';
 declare module '.vtt';
+declare module '*.mp3';
