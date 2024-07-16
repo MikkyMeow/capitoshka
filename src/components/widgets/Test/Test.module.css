@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.question {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.wrong {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.right {
+  background-color: rgba(13, 255, 0, 0.5);
+}

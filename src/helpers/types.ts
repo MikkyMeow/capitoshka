@@ -5,3 +5,15 @@ export interface IConversation {
   timeStart: number;
   timeEnd: number;
 }
+
+export interface ITest {
+  description: string;
+  questions: {
+    description: string;
+    variants?: string[];
+    right: string;
+    translate: string;
+  }[];
+}
+
+export type TLevel = 'a1' | 'a2' | 'b1' | 'b2' | 'c1' | 'c2';

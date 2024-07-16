@@ -1,4 +1,5 @@
-import { Lesson } from 'components/pages/Lesson/ui/Lesson';
+import { Grammar } from 'components/pages/Grammar/Grammar';
+import { GrammarLesson } from 'components/pages/GrammarLesson/GrammarLesson';
 import { Main } from 'components/pages/Main/ui/Main';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -17,7 +18,11 @@ export const router = createBrowserRouter([
   },
   {
     path: '/grammar',
-    element: <h1>Grammar</h1>,
+    element: <Grammar />,
+  },
+  {
+    path: '/grammar/:slug',
+    element: <GrammarLesson />,
   },
   {
     path: '/reading',
