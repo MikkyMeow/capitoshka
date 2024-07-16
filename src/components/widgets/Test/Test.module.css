@@ -19,3 +19,7 @@
 .right {
   background-color: rgba(13, 255, 0, 0.5);
 }
+
+.radioGroup {
+  width: 100%;
+}

@@ -1,10 +1,10 @@
-import { PageContinaer } from 'components/templates/PageContainer/PageContainer';
+import { PageContainer } from 'components/templates/PageContainer/PageContainer';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { IThemeLinks, themes } from '../../../content/grammarThemes';
 import { Button, Dialog, List, ListItem } from '@mui/material';
 import { Test } from 'components/widgets/Test/Test';
 import styles from './GrammarLesson.module.css';
+import { IThemeLinks, themes } from 'content/grammar';
 
 export const GrammarLesson = () => {
   const { slug } = useParams();
@@ -15,7 +15,7 @@ export const GrammarLesson = () => {
   );
 
   return (
-    <PageContinaer gap={20}>
+    <PageContainer gap={20}>
       <h2>Grammar Lesson</h2>
       {currentTheme && (
         <>
@@ -41,6 +41,6 @@ export const GrammarLesson = () => {
           </Dialog>
         </>
       )}
-    </PageContinaer>
+    </PageContainer>
   );
 };

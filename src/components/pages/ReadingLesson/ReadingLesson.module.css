@@ -1,0 +1,7 @@
+.blur {
+  filter: blur(8px);
+}
+
+.dialog {
+  padding: 20px;
+}

@@ -10,9 +10,9 @@ export interface ITest {
   description: string;
   questions: {
     description: string;
-    variants?: string[];
     right: string;
     translate: string;
+    variants?: string[];
   }[];
 }
 

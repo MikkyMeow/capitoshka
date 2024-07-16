@@ -6,7 +6,7 @@ interface IProps {
   gap?: number;
 }
 
-export const PageContinaer: FC<IProps> = ({ children, gap }) => {
+export const PageContainer: FC<IProps> = ({ children, gap }) => {
   return (
     <div className={styles.root} style={{ gap }}>
       {children}

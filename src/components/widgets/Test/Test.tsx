@@ -1,4 +1,10 @@
-import { Button, TextField } from '@mui/material';
+import {
+  Button,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+} from '@mui/material';
 import { FC, useState } from 'react';
 import styles from './Test.module.css';
 import { getRandomNumbers } from 'helpers/getRandomNumbers';
@@ -21,7 +27,7 @@ export const Test: FC<IProps> = ({ test }) => {
     const answers = Object.values(testAnswers);
     let rightAnswers: number[] = [];
     let wrongAnswers: number[] = [];
-    if (answers.length === 10) {
+    if (answers.length === testNumbers.length) {
       testNumbers.forEach((num) => {
         if (
           testAnswers[num].toLocaleLowerCase() ===
@@ -40,8 +46,6 @@ export const Test: FC<IProps> = ({ test }) => {
     setIsChecked(true);
   };
 
-  console.log(rightAnswers, wrongAnswers);
-
   return (
     <div className={styles.root}>
       <h4>{test.description}:</h4>
@@ -58,15 +62,30 @@ export const Test: FC<IProps> = ({ test }) => {
             <Tooltip title={test.questions[num].translate}>
               <TranslateOutlined />
             </Tooltip>
-            <TextField
-              fullWidth
-              variant="standard"
-              placeholder="Enter the answer"
-              onChange={(e) =>
-                setTestAnswers({ ...testAnswers, [num]: e.target.value })
-              }
-              value={testAnswers[num]}
-            />
+            {test.questions[num].variants ? (
+              <RadioGroup className={styles.radioGroup}>
+                {test.questions[num].variants?.map((label) => (
+                  <FormControlLabel
+                    value={label}
+                    control={<Radio />}
+                    label={label}
+                    onChange={() =>
+                      setTestAnswers({ ...testAnswers, [num]: label })
+                    }
+                  />
+                ))}
+              </RadioGroup>
+            ) : (
+              <TextField
+                fullWidth
+                variant="standard"
+                placeholder="Enter the answer"
+                onChange={(e) =>
+                  setTestAnswers({ ...testAnswers, [num]: e.target.value })
+                }
+                value={testAnswers[num]}
+              />
+            )}
           </div>
         ))}
       </div>

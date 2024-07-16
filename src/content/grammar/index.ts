@@ -1,6 +1,6 @@
-import { theory } from './grammar/presentSimple/theory';
-import { test } from './grammar/presentSimple/test';
 import { ITest } from 'helpers/types';
+import { theory } from './presentSimple/theory';
+import { test } from './presentSimple/test';
 
 export interface IThemeLinks {
   name: string;
