@@ -1,6 +1,6 @@
 import { IConversation } from 'helpers/types';
 
-export const conversation: IConversation[] = [
+export const conversation1: IConversation[] = [
   {
     speaker: 2,
     eng: '1.1',

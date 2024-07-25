@@ -1,18 +1,16 @@
 import { PageContainer } from 'components/templates/PageContainer/PageContainer';
 import { List, ListItem } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { reading } from 'content/reading';
+import { listening } from 'content/listening';
 
-export const ReadingList = () => {
+export const ListeningList = () => {
   return (
     <PageContainer>
-      <h2>Reading List</h2>
+      <h2>Listening List</h2>
       <List>
-        {reading.map((theme) => (
+        {listening.map((theme) => (
           <ListItem>
-            <Link to={theme.link}>
-              {theme.level}: {theme.name}
-            </Link>
+            <Link to={theme.link}>{theme.name}</Link>
           </ListItem>
         ))}
       </List>

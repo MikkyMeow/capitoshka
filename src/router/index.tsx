@@ -1,5 +1,7 @@
 import { GrammarLesson } from 'components/pages/GrammarLesson/GrammarLesson';
 import { GrammarList } from 'components/pages/GrammarList/GrammarList';
+import { ListeningLesson } from 'components/pages/ListeningLesson/ListeningLesson';
+import { ListeningList } from 'components/pages/ListeningList/ListeningList';
 import { Main } from 'components/pages/Main/ui/Main';
 import { ReadingLesson } from 'components/pages/ReadingLesson/ReadingLesson';
 import { ReadingList } from 'components/pages/ReadingList/ReadingList';
@@ -35,8 +37,12 @@ export const router = createBrowserRouter([
     element: <ReadingLesson />,
   },
   {
-    path: '/Listening',
-    element: <h1>Listening</h1>,
+    path: '/listening',
+    element: <ListeningList />,
+  },
+  {
+    path: '/listening/:slug',
+    element: <ListeningLesson />,
   },
   {
     path: '/speaking',
